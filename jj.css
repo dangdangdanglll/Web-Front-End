@@ -1,0 +1,49 @@
+.fo{
+	border-radius: 10px;
+}
+ #s1{
+      	height: 300px;
+      	width: 220px;
+
+      }
+      #s2{
+      	position: relative;
+      	z-index: 1;
+      }
+      .fo1{
+      	text-align: center;
+      }
+      #test{
+      	color: white;
+      	background-color: blue;
+      	opacity: 0.4;
+      	position: absolute;
+      	bottom: 5px;
+      	left: 20px;
+      	z-index: 5
+      }
+      #tes{
+      	color: white;
+      	background-color: blue;
+      	opacity: 0.4;
+      	position: absolute;
+      	bottom: 5px;
+      	right: 20px;
+      	z-index: 5
+      }
+      .fa1{
+      	float: left;
+      	border-style: outset;
+      }
+      #f2{
+      	margin-left: 97px;
+      }
+      #f3{
+      	margin-left: 97px;
+      }
+      #f4{
+      	margin-left: 97px;
+      }
+      #f5{
+      	margin-left: 97px;
+      }
