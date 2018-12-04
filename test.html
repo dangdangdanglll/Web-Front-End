@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		td{
+			width: 50px;
+			height:35px;
+			border:1px solid black;
+		}
+		table{
+			/*去掉格子间距*/
+			border-collapse:collapse;
+		}
+		table input{
+			width: 50px;
+			height: 35px;
+		}
+	</style>
+</head>
+<body>
+	<div id="region-radio-wrapper"></div>
+    <div id="product-radio-wrapper"></div>
+    <div id="tablee">
+    	<button>保存</button>
+    </div>
+</body>
+<script type="text/javascript">
+	let sourceData = [{
+    product: "手机",
+    region: "华东",
+    sale: [120, 100, 140, 160, 180, 185, 190, 210, 230, 245, 255, 270]
+}, {
+    product: "手机",
+    region: "华北",
+    sale: [80, 70, 90, 110, 130, 145, 150, 160, 170, 185, 190, 200]
+}, {
+    product: "手机",
+    region: "华南",
+    sale: [220, 200, 240, 250, 260, 270, 280, 295, 310, 335, 355, 380]
+}, {
+    product: "笔记本",
+    region: "华东",
+    sale: [50, 60, 80, 110, 30, 20, 70, 30, 420, 30, 20, 20]
+}, {
+    product: "笔记本",
+    region: "华北",
+    sale: [30, 35, 50, 70, 20, 15, 30, 50, 710, 130, 20, 20]
+}, {
+    product: "笔记本",
+    region: "华南",
+    sale: [80, 120, 130, 140, 70, 75, 120, 90, 550, 120, 110, 100]
+}, {     
+    product: "智能音箱",
+    region: "华东",
+    sale: [10, 30, 4, 5, 6, 5, 4, 5, 6, 5, 5, 25]
+}, {
+    product: "智能音箱",
+    region: "华北",
+    sale: [15, 50, 15, 15, 12, 11, 11, 12, 12, 14, 12, 40]
+}, {
+    product: "智能音箱",
+    region: "华南",
+    sale: [10, 40, 10, 6, 5, 6, 8, 6, 6, 6, 7, 26]
+}]
+
+
+var container = document.getElementById('region-radio-wrapper');
+var container2 = document.getElementById('product-radio-wrapper');
+var arrayprod = new Array();
+var arraytele = new Array();
+function newchexBox(container1) {
+	
+	arrayprod = unique(arrayprod);
+	for(var i = 0;i<arrayprod.length;i++){
+		var node = document.createElement('input');
+		var text = document.createTextNode(arrayprod[i]);
+		node.type = 'checkbox';
+        container1.appendChild(node);
+        container1.appendChild(text);
+	}
+	var node = document.createElement('input');
+	var text = document.createTextNode('全选');
+	node.type = 'checkbox';
+    container1.appendChild(node);
+    container1.appendChild(text);
+	
+}
+//数组去除重复项
+function unique(arr){
+    let newArr = [arr[0]];
+    for(let i = 1; i < arr.length; i++){
+          let flag = false;
+          for(var j = 0; j < newArr.length; j++){
+               if(arr[i] == newArr[j]){
+                flag = true;
+                break;
+               }
+          }
+          if(!flag){
+               newArr.push(arr[i]);
+          }
+     }
+     return newArr;
+}
+//去掉首项
+function deleFirst(arr){
+	if(arr[0]==null){
+		let newArr = new Array();
+	for(i = 1;i<arr.length;i++){
+		newArr.push(arr[i]);
+	}
+	return newArr;
+	}
+	else
+		return arr;
+}
+
+
+
+
+for(var i in sourceData){
+        arrayprod.push(sourceData[i].product);
+	}
+
+newchexBox(container);
+
+arrayprod.splice(0,arrayprod.length);
+for(var i in sourceData){
+        arrayprod.push(sourceData[i].region);
+	}
+
+newchexBox(container2);
+
+
+
+
+var inputs = document.getElementsByTagName('input');
+function allSelect() {
+	 inputs[3].addEventListener('click',function3,false);
+	 function function3 (){
+
+	 	if(inputs[3].checked){
+	 		
+	 		for(i = 0;i<3;i++)
+	 			inputs[i].checked=true;
+	 	}
+	 	else{
+	 		
+	 		for(i = 0;i<3;i++)
+	 			inputs[i].checked=false;
+	 	}
+	 }
+	 inputs[7].addEventListener('click',function7,false);
+	function function7(){
+		if(inputs[7].checked)
+			for(i = 4;i<7;i++)
+				inputs[i].checked=true;
+		else{
+			for(i = 4;i<7;i++)
+				inputs[i].checked=false;
+		}
+	}
+    
+    
+    
+}
+function toAll() {
+	allSelect();
+	var counter = 0;
+	for(i = 0;i<3;i++){
+		inputs[i].addEventListener('click',funtoall);
+	}
+	
+
+
+    	function funtoall(){
+    		counter=0;
+    		for(i = 0;i<3;i++){
+			if(inputs[i].checked){
+    		        counter++;
+    	        }
+
+            
+    		    if(inputs[i].checked&&counter==3){
+    			inputs[3].checked=true;
+    		    }	
+    		}
+    		
+    	}
+    
+    
+    	function funtoalll(){
+    		counter=0;
+    		for(i = 4;i<7;i++){
+    	        if(inputs[i].checked){
+    		        counter++;
+    	        }
+
+            
+    		    if(inputs[i].checked&&counter==3){
+    			inputs[7].checked=true;
+    		    }	
+    		}
+    		
+    	}
+    	for(i = 4;i<7;i++){
+    	inputs[i].addEventListener('click',funtoalll);
+    }
+    
+}
+
+toAll();
+
+
+var arr1 = new Array();
+var arr2 = new Array();
+var flag = 0;
+var flag1 = 0;
+var inputss = document.getElementsByTagName('input');
+for(let n = 0 ; n < 7; n++){
+	inputss[n].addEventListener('click',createTable,false);
+}
+function createTable() {
+    
+
+
+	arr1.splice(0,arr1.length);
+	arr2.splice(0,arr2.length);
+	var coun = 0;
+	var coun2 = 0;
+
+	var body = document.getElementById('tablee');
+	var table = document.createElement('table');
+	var tr0 = document.createElement('tr');
+
+	var btnn;
+	body.appendChild(table);
+	table.appendChild(tr0);
+	if(flag==0){
+		creaHeader(table);
+		flag++;
+	}
+
+
+	for(i = 0;i < 3;i++){
+		if(inputs[i].checked){
+			coun++;
+			arr1.push(inputs[i].nextSibling.nodeValue);
+		}
+	}
+	for(i = 4;i<7;i++){
+		if(inputs[i].checked){
+			coun2++;
+			arr2.push(inputs[i].nextSibling.nodeValue);
+		}
+	}
+
+	arr1 = unique(arr1);
+	arr1 = deleFirst(arr1);
+	arr2 = unique(arr2);
+	arr2 = deleFirst(arr2);
+
+    //清空原来生成的行
+	for(var k = 0;k < 10;k++){
+		var delNo = document.getElementById('newCrea');
+	    if(delNo)
+		    delNo.parentNode.removeChild(delNo);
+	}
+    //清空原来多余的空table
+    // while(body.firstChild.nextSibling != body.lastChild){
+    // 	// if(body.firstChild.nextSibling != body.lastChild)
+    // 	    body.removeChild(body.firstChild.nextSibling);
+    // }
+    
+    //新生成行
+    for(var k = 0;k<coun;k++){  //控制商品
+    	for(let j = 0;j < coun2;j++){  //控制属性
+          creaRow(table,arr1[k],arr2[j],arr1[k],arr2[j]);
+
+	    }
+    }
+
+    // if(flag1 == 0){
+    // 	btnn=loacSto(body);
+    // 	flag1++;
+    // }
+    var btnn = document.getElementsByTagName('button')[0];
+	btnn.addEventListener('click',function(){
+	 
+		var inputt = body.getElementsByTagName('input');
+		for(i = 0;i < inputt.length;i++){
+			var text1 = inputt[i].parentNode.parentNode.firstChild.innerHTML;
+			var text2 = inputt[i].parentNode.parentNode.firstChild.nextSibling.innerHTML;
+			localStorage.setItem(text1+text2+i,inputt[i].value);
+			//console.log(text1,text2,i+1,inputt[i].value);
+		}
+	})
+}
+//生成表头（第一行）
+function creaHeader(table) {
+
+
+    var tr = document.createElement('tr');	
+    table.appendChild(tr);
+
+	var td0 = document.createElement('td');
+	tr.appendChild(td0);
+	td0.innerHTML = '商品';
+
+	var td1 = document.createElement('td');
+	tr.appendChild(td1);
+	td1.innerHTML = '属性';
+
+	for(i = 0;i<12 ;i++){
+		var td = document.createElement('td');
+		td.innerHTML = i + 1 + "月";
+		tr.appendChild(td);
+	}
+	
+}
+//生成每一行
+function creaRow(table,produce,region,what,where) {
+	var tr1 = document.createElement('tr');
+	tr1.id = 'newCrea';
+    table.appendChild(tr1);
+    var td = document.createElement("td");
+    td.innerHTML = what;
+    tr1.appendChild(td);
+
+    var td = document.createElement("td");
+    td.innerHTML = where;
+    tr1.appendChild(td);
+
+    arrayprod = rearray(produce,region);
+
+    for(i = 0 ;i < 12 ; i++){
+    	var input = document.createElement('input');
+    	var td = document.createElement('td');
+    	td.appendChild(input);
+    	input.type = "text";
+    	if(localStorage.getItem(what + where+i)){
+    		input.value = localStorage.getItem(what + where + i)
+    	}
+    	else{
+    		input.setAttribute("value",arrayprod[i]);
+    	}
+        
+    	tr1.appendChild(td);
+    }
+}
+//本地保存
+function loacSto(body){
+	var btn = document.createElement("button");
+	btn.innerHTML= "保存";
+    body.appendChild(btn);
+    return btn;
+}
+//从对象中生成数组
+function rearray(parameter1,parameter2){
+        arrayprod.splice(0,arrayprod.length);
+    	for(var j in sourceData){
+    	    if(sourceData[j].product == parameter1&&sourceData[j].region == parameter2){
+    		for(var i = 0;i < sourceData[j].sale.length; i++){
+    			arrayprod.push(sourceData[j].sale[i]);
+    		}
+    	}
+        }
+        return arrayprod;
+    }
+</script>
+</html>
